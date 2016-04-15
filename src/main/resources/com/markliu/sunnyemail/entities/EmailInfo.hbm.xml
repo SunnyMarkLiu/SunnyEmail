@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-4-15 15:39:45 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.markliu.sunnyemail.entities.EmailInfo" table="EMAILINFO">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="toAddress" type="java.lang.String">
+            <column name="TOADDRESS" />
+        </property>
+        <property name="subject" type="java.lang.String">
+            <column name="SUBJECT" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="CONTENT" />
+        </property>
+        <property name="attachmentFiles" type="java.lang.String">
+            <column name="ATTACHMENTFILES" />
+        </property>
+        <property name="fromAddress" type="java.lang.String">
+            <column name="FROMADDRESS" />
+        </property>
+        <property name="sentDate" type="java.util.Date">
+            <column name="SENTDATE" />
+        </property>
+        <property name="needReply" type="boolean">
+            <column name="NEEDREPLY" />
+        </property>
+        <property name="isReaded" type="boolean" access="field">
+            <column name="ISREADED" />
+        </property>
+        <property name="containsAttachments" type="boolean">
+            <column name="CONTAINSATTACHMENTS" />
+        </property>
+        <property name="carbonCopy" type="java.lang.String">
+            <column name="CARBONCOPY" />
+        </property>
+        <property name="darkCopy" type="java.lang.String">
+            <column name="DARKCOPY" />
+        </property>
+        <property name="messageID" type="java.lang.String">
+            <column name="MESSAGEID" />
+        </property>
+    </class>
+</hibernate-mapping>

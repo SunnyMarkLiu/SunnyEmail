@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-4-15 14:59:52 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.markliu.sunnyemail.entities.EmailInbox" table="EMAILINBOX">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="email" class="com.markliu.sunnyemail.entities.EmailInfo">
+            <column name="EMAIL_ID" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
