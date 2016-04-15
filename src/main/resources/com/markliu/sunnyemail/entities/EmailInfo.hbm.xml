@@ -41,8 +41,8 @@
         <property name="darkCopy" type="java.lang.String">
             <column name="DARKCOPY" />
         </property>
-        <property name="messageID" type="java.lang.String">
-            <column name="MESSAGEID" />
+        <property name="priority" type="float">
+            <column name="PRIORITY" />
         </property>
     </class>
 </hibernate-mapping>

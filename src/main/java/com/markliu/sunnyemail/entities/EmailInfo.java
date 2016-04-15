@@ -70,6 +70,11 @@ public class EmailInfo {
 	 * 此邮件的Message-ID
 	 */
 	private String messageID;
+	
+	/**
+	 * <b>新邮件</b>需要被阅读的优先级，该优先级别由机器学习算法得到
+	 */
+	private float priority;
 
 	public EmailInfo() {
 	}
@@ -178,15 +183,24 @@ public class EmailInfo {
 		this.darkCopy = darkCopy;
 	}
 
+	public float getPriority() {
+		return priority;
+	}
+
+	public void setPriority(float priority) {
+		this.priority = priority;
+	}
+
 	@Override
 	public String toString() {
-		return "EmailInfo [toAddress=" + toAddress + ", subject=" + subject
-				+ ", content=" + content + ", attachmentFiles="
-				+ attachmentFiles + ", fromAddress=" + fromAddress
-				+ ", sentDate=" + sentDate + ", needReply=" + needReply
-				+ ", isReaded=" + isReaded + ", containsAttachments="
-				+ containsAttachments + ", carbonCopy=" + carbonCopy
-				+ ", darkCopy=" + darkCopy + ", messageID=" + messageID + "]";
+		return "EmailInfo [id=" + id + ", toAddress=" + toAddress
+				+ ", subject=" + subject + ", content=" + content
+				+ ", attachmentFiles=" + attachmentFiles + ", fromAddress="
+				+ fromAddress + ", sentDate=" + sentDate + ", needReply="
+				+ needReply + ", isReaded=" + isReaded
+				+ ", containsAttachments=" + containsAttachments
+				+ ", carbonCopy=" + carbonCopy + ", darkCopy=" + darkCopy
+				+ ", messageID=" + messageID + ", priority=" + priority + "]";
 	}
 
 }
