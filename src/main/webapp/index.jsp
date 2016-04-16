@@ -4,10 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Employee</title>
+<title>Sunny Email</title>
 </head>
 <body>
-	<a href="<%=request.getContextPath() %>/emailinfo/emailinfo_saveEmailInfo.action">save EmailInfo</a><br/><br/>
-	<a href="<%=request.getContextPath() %>/employee/employee_addform.action">Add Employee</a>
+	<%
+		System.out.println("user: " + session.getAttribute("user"));
+		if(session.getAttribute("user") == null) {
+			response.sendRedirect("login.jsp");
+		} else {
+			request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request,response);
+		}
+	%> 
 </body>
 </html>
