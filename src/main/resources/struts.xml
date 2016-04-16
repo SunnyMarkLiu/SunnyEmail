@@ -21,8 +21,8 @@
 
 	<package name="" namespace="/user" extends="struts-default">
 		<action name="user_*" class="userAction" method="{1}">
-			<result name="success">/WEB-INF/index.jsp</result>
-			<result name="error">/WEB-INF/error.jsp</result>
+			<result name="success" type="redirect">/pages/index.jsp</result>
+			<result name="error">/pages/error.jsp</result>
 		</action>
 	</package>
 
