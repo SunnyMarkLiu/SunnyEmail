@@ -6,9 +6,10 @@
     <class name="com.markliu.sunnyemail.entities.EmailDeleted" table="EMAILDELETED">
         <id name="id" type="java.lang.Integer">
             <column name="ID" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
-        <many-to-one name="email" class="com.markliu.sunnyemail.entities.EmailInfo">
+        <!-- 删除 EmailDeleted 时，级联删除 EmailInfo -->
+        <many-to-one name="email" class="com.markliu.sunnyemail.entities.EmailInfo" cascade="delete">
             <column name="EMAIL_ID" />
         </many-to-one>
     </class>

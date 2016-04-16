@@ -13,8 +13,7 @@ public class EmailInbox {
 	public EmailInbox() {
 	}
 
-	public EmailInbox(Integer id, EmailInfo email) {
-		this.id = id;
+	public EmailInbox(EmailInfo email) {
 		this.email = email;
 	}
 

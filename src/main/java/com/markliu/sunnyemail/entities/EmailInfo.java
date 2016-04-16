@@ -29,7 +29,7 @@ public class EmailInfo {
 	/**
 	 * 待上传附件的路径及名称�?�或下载附件的地�?及名�? ,注意有多个，操作时需要解析
 	 */
-	private String attachmentFiles;
+	private String attachmentFiles = "";
 
 	/**
 	 * 发�?�方的地�?
@@ -67,14 +67,19 @@ public class EmailInfo {
 	private String darkCopy;
 
 	/**
-	 * 此邮件的Message-ID
+	 * 此邮件的Message-ID，唯一标识一份邮件
 	 */
 	private String messageID;
 	
 	/**
 	 * <b>新邮件</b>需要被阅读的优先级，该优先级别由机器学习算法得到
 	 */
-	private float priority;
+	private float priority = 0;
+	
+	/**
+	 * 实际邮箱的 folder 中该邮件的序号
+	 */
+	private int messageNumber;
 
 	public EmailInfo() {
 	}
@@ -191,16 +196,25 @@ public class EmailInfo {
 		this.priority = priority;
 	}
 
+	public int getMessageNumber() {
+		return messageNumber;
+	}
+
+	public void setMessageNumber(int messageNumber) {
+		this.messageNumber = messageNumber;
+	}
+
 	@Override
 	public String toString() {
-		return "EmailInfo [id=" + id + ", toAddress=" + toAddress
-				+ ", subject=" + subject + ", content=" + content
-				+ ", attachmentFiles=" + attachmentFiles + ", fromAddress="
-				+ fromAddress + ", sentDate=" + sentDate + ", needReply="
-				+ needReply + ", isReaded=" + isReaded
-				+ ", containsAttachments=" + containsAttachments
-				+ ", carbonCopy=" + carbonCopy + ", darkCopy=" + darkCopy
-				+ ", messageID=" + messageID + ", priority=" + priority + "]";
+		return "EmailInfo [\n\tid=" + id + ", \n\ttoAddress=" + toAddress
+				+ ", \n\tsubject=" + subject + ", \n\tcontent=" + content
+				+ ", \n\tattachmentFiles=" + attachmentFiles + ", \n\tfromAddress="
+				+ fromAddress + ", \n\tsentDate=" + sentDate + ", \n\tneedReply="
+				+ needReply + ", \n\tisReaded=" + isReaded
+				+ ", \n\tcontainsAttachments=" + containsAttachments
+				+ ", \n\tcarbonCopy=" + carbonCopy + ", \n\tdarkCopy=" + darkCopy
+				+ ", \n\tmessageID=" + messageID + ", \n\tpriority=" + priority
+				+ ", \n\tmessageNumber=" + messageNumber + "]";
 	}
 
 }

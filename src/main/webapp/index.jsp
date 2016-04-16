@@ -7,7 +7,7 @@
 <title>Employee</title>
 </head>
 <body>
-	<a href="<%=request.getContextPath() %>/employee/employee_listAll.action">List All Employees</a><br/><br/>
+	<a href="<%=request.getContextPath() %>/emailinfo/emailinfo_saveEmailInfo.action">save EmailInfo</a><br/><br/>
 	<a href="<%=request.getContextPath() %>/employee/employee_addform.action">Add Employee</a>
 </body>
 </html>

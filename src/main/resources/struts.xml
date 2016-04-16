@@ -19,7 +19,10 @@
 	<!-- 设置上传文件的最大大小为10485760字节=10M -->
 	<constant name="struts.multipart.maxSize" value="10485760" />
 
-	<package name="" namespace="/" extends="struts-default">
+	<package name="" namespace="/emailinfo" extends="struts-default">
+		<action name="emailinfo_*" class="emailInfoAction" method="{1}">
+			<result name="saveEmailInfo">/WEB-INF/pages/success.jsp</result>
+		</action>
 	</package>
 
 </struts>

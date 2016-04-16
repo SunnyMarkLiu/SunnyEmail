@@ -38,11 +38,17 @@ import com.markliu.sunnyemail.util.emailutil.util.FetchingEmailUtil;
  */
 public class EmailServerService {
 	
+	private EmailServerInfo emailServerInfo = null;
+	
 	/**
 	 * 获取配置的邮箱服务器的信息
 	 * @return
 	 */
 	public EmailServerInfo getConfigEmailServerInfo() {
+		if (emailServerInfo != null) {
+			return emailServerInfo;
+		}
+		System.out.println("读取email服务器配置文件");
 		// 读取配置文件
 		Properties properties = new Properties();
 		InputStream inStream = null;
@@ -87,6 +93,7 @@ public class EmailServerService {
 			
 			System.out.println("--------邮件服务器配置信息--------");
 			System.out.println(emailServerInfo.toString());
+			this.emailServerInfo = emailServerInfo;
 			return emailServerInfo;
 		} catch (IOException e) {
 			e.printStackTrace();
