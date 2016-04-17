@@ -43,10 +43,6 @@ ul {
 	padding: 0;
 	margin: 0;
 }
-hr {
-	width: 70px;
-	border-top: 4px solid #f39c12;
-}
 .btn-primary {
 	padding: 8px 20px;
 	background: #f39c12;
@@ -154,7 +150,7 @@ body > section {
 	padding-bottom: 28px;
 }
 .navbar-inverse .navbar-nav > li > a {
-	padding: 5px 8px;
+	padding: 5px 5px;
 	margin: 0;
 	border-radius: 5px;
 	color: #fff;
@@ -167,7 +163,7 @@ body > section {
 }
 .navbar-inverse {
 	border: 0;
-	box-shadow: 0 20px 20px rgba(243,156,18,0.3)
+	box-shadow: 0 20px 20px     rgba(158, 243, 18, 0.3);
 }
 .navbar-inverse .navbar-brand {
 	font-size: 36px;

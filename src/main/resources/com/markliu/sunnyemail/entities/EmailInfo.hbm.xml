@@ -23,7 +23,7 @@
         <property name="fromAddress" type="java.lang.String">
             <column name="FROMADDRESS" />
         </property>
-        <property name="sentDate" type="java.util.Date">
+        <property name="sentDate" type="timestamp">
             <column name="SENTDATE" />
         </property>
         <property name="needReply" type="boolean">

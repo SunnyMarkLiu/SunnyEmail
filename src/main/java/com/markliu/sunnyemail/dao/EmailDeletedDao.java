@@ -57,8 +57,8 @@ public class EmailDeletedDao {
 	public int getTotalEmailDeletedCount() {
 		String hql = "SELECT count(e.id) FROM EmailDeleted e";
 		try {
-			Integer count = (Integer) getSession().createQuery(hql).uniqueResult();
-			return count;
+			Long count = (Long) getSession().createQuery(hql).uniqueResult();
+			return count.intValue();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;

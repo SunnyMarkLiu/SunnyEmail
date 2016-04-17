@@ -9,7 +9,7 @@
             <generator class="native" />
         </id>
         <!-- 删除 EmailSpam 时，级联删除 EmailInfo -->
-        <many-to-one name="email" class="com.markliu.sunnyemail.entities.EmailInfo" cascade="delete">
+        <many-to-one name="email" class="com.markliu.sunnyemail.entities.EmailInfo" cascade="delete" lazy="false">
             <column name="EMAIL_ID" />
         </many-to-one>
     </class>

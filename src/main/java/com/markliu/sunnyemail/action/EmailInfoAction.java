@@ -36,7 +36,7 @@ public class EmailInfoAction extends ActionSupport {
 		EmailInbox emailInbox = new EmailInbox(emailInfo);
 		emailInfoService.saveEmailInfo(emailInfo);
 		emailInboxService.saveEmailInbox(emailInbox);
-		return "saveEmailInfo";
+		return SUCCESS;
 	}
 	
 	public String deleteEmailInfo() {

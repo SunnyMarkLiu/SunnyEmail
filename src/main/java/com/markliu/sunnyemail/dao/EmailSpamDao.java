@@ -57,8 +57,8 @@ public class EmailSpamDao {
 	public int getTotalEmailSpamCount() {
 		String hql = "SELECT count(e.id) FROM EmailSpam e";
 		try {
-			Integer count = (Integer) getSession().createQuery(hql).uniqueResult();
-			return count;
+			Long count = (Long) getSession().createQuery(hql).uniqueResult();
+			return count.intValue();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;

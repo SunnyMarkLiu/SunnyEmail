@@ -15,7 +15,6 @@
 </head>
 <body>
 	<%
-		System.out.println("user: " + session.getAttribute("user"));
 		if(session.getAttribute("user") == null) {
 			response.sendRedirect("login.jsp");
 		} else {

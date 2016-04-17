@@ -1,5 +1,7 @@
 package com.markliu.sunnyemail.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,11 +59,23 @@ public class EmailInboxDao {
 	public int getTotalEmailInboxCount() {
 		String hql = "SELECT count(e.id) FROM EmailInbox e";
 		try {
-			Integer count = (Integer) getSession().createQuery(hql).uniqueResult();
-			return count;
+			Long count = (Long) getSession().createQuery(hql).uniqueResult();
+			return count.intValue();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<EmailInbox> getAllEmailInboxs() {
+		String hql = "FROM EmailInbox";
+		try {
+			List<EmailInbox> emailInboxs = getSession().createQuery(hql).list();
+			return emailInboxs;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	

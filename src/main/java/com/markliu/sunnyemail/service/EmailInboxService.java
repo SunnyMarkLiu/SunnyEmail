@@ -1,5 +1,7 @@
 package com.markliu.sunnyemail.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,10 @@ public class EmailInboxService {
 	
 	public int getTotalEmailInboxCount() {
 		return emailInboxDao.getTotalEmailInboxCount();
+	}
+	
+	public List<EmailInbox> getAllEmailInboxs() {
+		return emailInboxDao.getAllEmailInboxs();
 	}
 	
 	public EmailInbox getEmailInboxById(Integer id) {

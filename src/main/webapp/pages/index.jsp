@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,9 +25,18 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/email_ajax.js"></script>
+
+<style type="text/css">
+	hr {
+		width: 80px;
+		border-top: 4px solid #f39c12;
+	}
+</style>
+
 </head>
 	<%
-		System.out.println("user: " + session.getAttribute("user"));
 		if(session.getAttribute("user") == null) {
 			response.sendRedirect("../login.jsp");
 		}
@@ -49,10 +59,10 @@
 					<ul class="nav navbar-nav">
 						<li style="font-size: 16px;"><a href="about.html">${user.emailAddress }</a></li>
 						<li class="active"><a href="index.jsp">Home</a></li>
-						<li><a href="about.html">收件箱</a></li>
-						<li><a href="services.html">发件箱</a></li>
-						<li><a href="portfolio.html">垃圾箱</a></li>
-						<li><a href="pricing.html">垃圾邮件</a></li>
+						<li><a href="<%=request.getContextPath() %>/email/emailInbox_listInbox.action">收件箱 <s:if test="#session.totalEmailInboxCount != 0"><b id="emailInboxCount" style="color: #fff">${totalEmailInboxCount }</b></s:if></a></li>
+						<li><a href="<%=request.getContextPath() %>/email/emailInbox_listInbox.action">发件箱 <s:if test="#session.totalEmailSentedCount != 0"><b id="emailSentedCount" style="color: #fff">${totalEmailSentedCount }</b></s:if></a></li>
+						<li><a href="<%=request.getContextPath() %>/email/emailInbox_listInbox.action">回收站 <s:if test="#session.totalEmailDeletedCount != 0"><b id="emailDeletedCount" style="color: #fff">${totalEmailDeletedCount }</b></s:if></a></li>
+						<li><a href="<%=request.getContextPath() %>/email/emailInbox_listInbox.action">垃圾箱 <s:if test="#session.totalEmailSpamCount != 0"><b id="emailSpamCount" style="color: #fff">${totalEmailSpamCount }</b></s:if></a></li>
 					</ul>
 				</div>
 			</div>
@@ -69,7 +79,7 @@
 					</h2>
 					<h3>Your intelligent email processor</h3>
 					<p>
-						<a href="about.html" class="slider btn">Read More</a>
+						<a href="#feature" class="slider btn">Read More</a>
 					</p>
 				</div>
 			</div>
@@ -91,20 +101,20 @@
 						<div class="feature-wrap">
 							<i class="fa fa-code"></i>
 							<h2>Web Design</h2>
-							<h3>Based on Struts2 + Hibernate4 + Spring4 + Bootstrap, Responsive layout, More beautiful</h3>
+							<h3>Based on Struts2 + Hibernate4 + Spring4 + Bootstrap, responsive layout, and more beautiful !</h3>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-6">
 						<div class="feature-wrap">
 							<i class="fa fa-laptop"></i>
 							<h2>Less Spam</h2>
-							<h3>Running Adaboost on Naive Bayes algorithm makes it more accuracy to filter spam email (ER = 0.5%)</h3>
+							<h3>Running Adaboost on Naive Bayes algorithm makes it more accuracy to filter spam email (ER = 0.5%) !</h3>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-6">
 						<div class="feature-wrap">
 							<i class="fa fa-bullhorn"></i>
-							<h2 style="font-size: 40px;">Using Priority</h2>
+							<h2>Using Priority</h2>
 							<h3>Giveing emails some priorities created by learning algorithm, you can't miss some importent email !</h3>
 						</div>
 					</div>
@@ -119,7 +129,7 @@
 					<h2>Want to discuss with me?</h2>
 					<hr>
 					<p style="color: #71B37B;font-size: 18px;">
-						This project is OpenSource, you can fork this project on Github. Welcome to fork and pull some requests.
+						This project is OpenSource, Welcome to fork this project on Github and pull some requests.
 					</p>
 					<a target="_blank" href="https://github.com/SunnyMarkLiu/SunnyEmail" class="btn btn-primary">Fork me on Github</a>
 				</div>
@@ -134,7 +144,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="follow-us">
-						<a href="https://github.com/SunnyMarkLiu" class="fa">
+						<a target="_blank" href="https://github.com/SunnyMarkLiu" class="fa">
 							<img src="../images/github.png" style="width: 50px;">
 						</a>
 					</div>
@@ -142,11 +152,7 @@
 			</div>
 		</div>
 	</footer>
-	<script type="text/javascript" src="../js/jquery.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.prettyPhoto.js"></script>
-	<script type="text/javascript" src="../js/jquery.isotope.min.js"></script>
-	<script type="text/javascript" src="../js/owl.carousel.js"></script>
 	<script type="text/javascript" src="../js/main.js"></script>
 </body>
 </html>
