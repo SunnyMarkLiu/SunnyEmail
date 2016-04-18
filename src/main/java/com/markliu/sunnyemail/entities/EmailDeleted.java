@@ -14,8 +14,7 @@ public class EmailDeleted {
 	public EmailDeleted() {
 	}
 
-	public EmailDeleted(Integer id, EmailInfo email) {
-		this.id = id;
+	public EmailDeleted(EmailInfo email) {
 		this.email = email;
 	}
 

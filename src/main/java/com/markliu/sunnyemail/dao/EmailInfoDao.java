@@ -89,7 +89,7 @@ public class EmailInfoDao {
 	 * @return
 	 */
 	public EmailInfo getEmailInfoById(Integer id) {
-		String hql = "SELECT FROM EmailInfo e WHERE e.id = ?";
+		String hql = "FROM EmailInfo e WHERE e.id = ?";
 		try {
 			EmailInfo emailInfo = (EmailInfo) getSession().createQuery(hql)
 					.setInteger(0, id).uniqueResult();
@@ -97,6 +97,15 @@ public class EmailInfoDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	public void setEmailReaded(String email_id) {
+		String hql = "UPDATE EmailInfo e SET e.isReaded = true WHERE e.id = ?";
+		try {
+			getSession().createQuery(hql).setInteger(0, Integer.parseInt(email_id)).executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

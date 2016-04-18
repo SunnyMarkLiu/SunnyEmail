@@ -93,9 +93,10 @@ public class UserAction extends ActionSupport implements SessionAware{
 		session.put("totalEmailDeletedCount", totalEmailDeletedCount);
 		session.put("totalEmailSpamCount", totalEmailSpamCount);
 
-		String json = "{\"emailInboxCount\":"+totalEmailInboxCount+",\"emailSentedCount\":"+totalEmailSentedCount+
-    			",\"emailDeletedCount\":"+totalEmailDeletedCount+",\"emailSpamCount\":"+totalEmailSpamCount+"}";
+		String json = "{\"emailInboxCount\":\""+totalEmailInboxCount+"\",\"emailSentedCount\":\""+totalEmailSentedCount+
+    			"\",\"emailDeletedCount\":\""+totalEmailDeletedCount+"\",\"emailSpamCount\":\""+totalEmailSpamCount+"\"}";
         
+		System.out.println(json);
     	inputStream = new ByteArrayInputStream(json.getBytes("UTF-8"));
         return "ajaxListInfo";
     }

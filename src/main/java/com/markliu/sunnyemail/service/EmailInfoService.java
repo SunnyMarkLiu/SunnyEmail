@@ -37,5 +37,9 @@ public class EmailInfoService {
 	public EmailInfo getEmailInfoById(Integer id) {
 		return emailInfoDao.getEmailInfoById(id);
 	}
+
+	public void setEmailReaded(String email_id) {
+		emailInfoDao.setEmailReaded(email_id);
+	}
 	
 }

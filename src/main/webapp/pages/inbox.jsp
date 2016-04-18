@@ -1,3 +1,5 @@
+<%@page import="com.markliu.sunnyemail.entities.EmailInbox"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
@@ -15,9 +17,6 @@
 <link href="../css/main.css" rel="stylesheet">
 <link href="../css/responsive.css" rel="stylesheet">
 <link href="../css/owl.theme.css" rel="stylesheet">
-<link
-	href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800'
-	rel='stylesheet' type='text/css'>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -26,6 +25,58 @@
 <link href="../css/show_emails.css" rel="stylesheet">
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/email_ajax.js"></script>
+<script type="text/javascript">
+	function emailread(i){
+		// ajax 异步调用 action，将邮件标记为已读
+		console.log("i: " + i);
+		var button = $("#emailinbox"+i);
+		var click_email_id = button.next().attr("id");
+		var url = "/sunnyemail/emailinfo/emailinfo_setEmailReaded.action";
+		console.log(url);
+		var args = {"email_id" : click_email_id};
+		$.post(url, args, function(result) {
+			// 动态修改邮件的图标
+			if(result == "1") {
+				button.children().children().children("span.glyphicon-envelope").css("color", "#c8c6c3");
+			}
+		});
+	}
+	
+	function emaildelete(i){
+		var button = $("#emailinbox"+i);
+		var click_email_id = button.next().attr("id");
+		var url = "/sunnyemail/emailinbox/emailinbox_deleteEmail.action";
+		var emailInbox_id = button.children().first().text();
+		console.log("emailInbox_id: " + emailInbox_id);
+		var args = {"email_id" : click_email_id, "emailInbox_id" : emailInbox_id};
+		$.post(url, args, function(result) {
+			// 动态修改邮件的图标
+			if(result == "1") {
+				button.remove();
+				var huishouzhang = $("ul li:eq(4) b");
+				var count = 0;
+				if(huishouzhang.text() != "") {
+					count = parseInt(huishouzhang.text());
+				}
+				huishouzhang.text(count + 1); // 回收站加1
+				
+				var sjx = $("ul li:eq(2) b"); // 收件箱减一
+				var count2 = -1;
+				if(sjx.text() != "") {
+					count2 = parseInt(sjx.text());
+					count2 = count2 - 1;
+					if(count2 == 0) {
+						sjx.text("");
+						$(".list-group").html("<div class=\"alert alert-warning\" role=\"alert\"><span style=\"color:#f39c12;\" class=\"glyphicon glyphicon-envelope\"></span>收件箱为空...</div>");
+					} else {
+						sjx.text(count2);
+					}
+				}
+			}
+		});
+	}
+	
+</script>
 </head>
 	<%
 		if(session.getAttribute("user") == null) {
@@ -48,7 +99,7 @@
 				</div>
 				<div class="collapse navbar-collapse navbar-right" style="font-size: 20px;">
 					<ul class="nav navbar-nav">
-						<li style="font-size: 16px;"><a href="about.html">${user.emailAddress }</a></li>
+						<li style="font-size: 16px;"><a href="#">${user.emailAddress }</a></li>
 						<li><a href="<%=request.getContextPath()%>/pages/index.jsp">Home</a></li>
 						<li class="active"><a href="#">收件箱 <s:if test="#session.totalEmailInboxCount != 0"><b id="emailInboxCount" style="color: #fff">${totalEmailInboxCount }</b></s:if></a></li>
 						<li><a href="sent.jsp">发件箱 <s:if test="#session.totalEmailSentedCount != 0"><b id="emailSentedCount" style="color: #fff">${totalEmailSentedCount }</b></s:if></a></li>
@@ -73,30 +124,70 @@
 				</div>
 			</s:if>
 			<s:else>
-				<s:iterator value="#request.emailInboxs" var="emailInbox">
-					<button class="list-group-item list-group-item-success">
-						<div class="row">
-							<span class="col-md-4" style="padding-left: 22px;">
-								<s:if test="emailInbox.email.isReaded">
-									<span style="color:#c8c6c3;" class="glyphicon glyphicon-envelope"></span>
-								</s:if>
-								<s:else>
-									<span style="color:#f39c12;" class="glyphicon glyphicon-envelope"></span>
-								</s:else>
-								<span style="padding-left: 20px;">${emailInbox.email.fromAddress }</span>
-							</span>
-							<span class="col-md-5">${emailInbox.email.subject }</span>
-							<span class="col-md-3">${emailInbox.email.sentDate }</span>
+				<%
+					List<EmailInbox> emailInboxs = (List<EmailInbox>) request.getAttribute("emailInboxs");
+					for(int i=0 ; i<emailInboxs.size(); i++) {
+						EmailInbox emailInbox = emailInboxs.get(i);
+				%>
+						<button id="emailinbox<%=i %>" class="list-group-item list-group-item-success" data-toggle="modal" data-target="#<%=emailInbox.getEmail().getId()%>">
+							<span class="emailInboxid" style="display: none;"><%=emailInbox.getId() %></span>
+							<div class="row">
+								<span class="col-md-4" style="padding-left: 22px;">
+									<%
+										if(emailInbox.getEmail().isReaded()) {
+									%>
+											<span style="color:#c8c6c3;" class="glyphicon glyphicon-envelope"></span>
+									<%
+										} else {
+									%>
+											<span style="color:#f39c12;" class="glyphicon glyphicon-envelope"></span>
+									<%
+										}
+									%>
+									<span style="padding-left: 20px;"><%=emailInbox.getEmail().getFromAddress() %></span>
+								</span>
+								<span class="col-md-5"><%=emailInbox.getEmail().getSubject() %></span>
+								<span class="col-md-3"><%=emailInbox.getEmail().getSentDate()%></span>
+							</div>
+						</button>
+						<div class="modal fade" onclick="emailread('<%=i %>')" id="<%=emailInbox.getEmail().getId()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						 <div class="modal-dialog" role="document" style="width: 70%">
+						   <div class="modal-content">
+						     <div class="modal-header">
+						       <button type="button" class="close" onclick="emailread('<%=i %>')" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h3 style="padding-left: 22px;">主题：<%=emailInbox.getEmail().getSubject() %></h3>
+						        <h3 style="font-size: 16px;line-height: 4px;color: rgb(161, 168, 162);padding-left: 22px;"><span>发件人：</span><%=emailInbox.getEmail().getFromAddress() %></h3>
+						        <h3 style="font-size: 16px;line-height: 4px;color: rgb(161, 168, 162);padding-left: 22px;"><span>收件人：</span><%=emailInbox.getEmail().getToAddress() %></h3>
+						        <h3 style="font-size: 16px;line-height: 4px;color: rgb(161, 168, 162);padding-left: 22px;"><span>时间：</span><%=emailInbox.getEmail().getSentDate() %></h3>
+						      </div>
+						      <div class="modal-body">
+						      	<div class="content">
+						      		<%=emailInbox.getEmail().getContent() %>
+						      	</div>
+						      	<div class="att">
+						      		<%
+						      			if(emailInbox.getEmail().isContainsAttachments()) {
+						      		%>
+									      	<h3>附件</h3>
+						      		<%
+						      			}
+						      		%>
+						      	</div>
+						      </div>
+						      <div class="modal-footer">
+						      	<button class="btn btn-success readed_close" onclick="emailread('<%=i %>')" data-dismiss="modal">关闭</button>
+						        <button id="close_email" class="btn btn-danger" onclick="emaildelete('<%=i %>')" data-dismiss="modal">删除邮件</button>
+						      </div>
+						    </div>
+						  </div>
 						</div>
-					</button>
-				</s:iterator>
+				<%
+					}
+				%>
 			</s:else>
 		</div>
-		
 	</div>
 	
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.isotope.min.js"></script>
-	<script type="text/javascript" src="../js/main.js"></script>
 </body>
 </html>

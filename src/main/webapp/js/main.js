@@ -23,10 +23,6 @@ jQuery(function($) {'use strict',
 	$(window).load(function(){'use strict';
 		var $portfolio_selectors = $('.portfolio-filter >li>a');
 		var $portfolio = $('.portfolio-items');
-		$portfolio.isotope({
-			itemSelector : '.portfolio-item',
-			layoutMode : 'fitRows'
-		});
 		
 		$portfolio_selectors.on('click', function(){
 			$portfolio_selectors.removeClass('active');
@@ -37,19 +33,5 @@ jQuery(function($) {'use strict',
 		});
 	});
 
-	// testimonial slider
-  	$(document).ready(function() {
-  	    $("#testimonial").owlCarousel({
-        navigation : false, // Show next and prev buttons
-        slideSpeed : 300,
-        paginationSpeed : 400,
-        singleItem:true
-        });
 
-  	});
-
-	//pretty photo
-	$("a[rel^='prettyPhoto']").prettyPhoto({
-		social_tools: false
-	});	
 });

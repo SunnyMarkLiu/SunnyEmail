@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -23,6 +23,12 @@
 		-webkit-background-size: cover;
 	}
 </style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	var json = '{"emailInboxCount":"4","emailSentedCount":"0","emailDeletedCount":"9","emailSpamCount":"0"}';
+	var result = jQuery.parseJSON(json); // 解析json数据
+	console.log(result.emailInboxCount + ' ' + result.emailSentedCount + ' ' + result.emailDeletedCount + ' ' + result.emailSpamCount);
+</script>
 </head>
 <body >
 	<div class="newsletter">

@@ -17,9 +17,6 @@
 <link href="../css/responsive.css" rel="stylesheet">
 <link href="../css/owl.carousel.css" rel="stylesheet">
 <link href="../css/owl.theme.css" rel="stylesheet">
-<link
-	href='http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800'
-	rel='stylesheet' type='text/css'>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

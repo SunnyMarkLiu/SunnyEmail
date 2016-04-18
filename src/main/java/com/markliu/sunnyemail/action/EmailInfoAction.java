@@ -1,5 +1,8 @@
 package com.markliu.sunnyemail.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -45,4 +48,23 @@ public class EmailInfoAction extends ActionSupport {
 		emailInfoService.saveEmailInfo(emailInfo);
 		return "saveEmailInfo";
 	}
+	
+	private String email_id;
+	public void setEmail_id(String email_id) {
+		this.email_id = email_id;
+	}
+	
+	private InputStream readedInputStream;
+	
+	public InputStream getReadedInputStream() {
+		return readedInputStream;
+	}
+	
+	public String setEmailReaded() throws Exception {
+		System.out.println("点击的email：" + email_id);
+		emailInfoService.setEmailReaded(email_id);
+		readedInputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
+		return "setEmailReaded";
+	}
+	
 }
