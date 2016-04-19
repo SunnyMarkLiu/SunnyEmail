@@ -53,19 +53,13 @@
 			// 动态修改邮件的图标
 			if(result == "1") {
 				button.remove();
-				var huishouzhang = $("ul li:eq(4) b");
-				var count = 0;
-				if(huishouzhang.text() != "") {
-					count = parseInt(huishouzhang.text());
-				}
-				huishouzhang.text(count + 1); // 回收站加1
 				
 				var sjx = $("ul li:eq(2) b"); // 收件箱减一
 				var count2 = -1;
 				if(sjx.text() != "") {
 					count2 = parseInt(sjx.text());
 					count2 = count2 - 1;
-					if(count2 == 0) {
+					if(count2 <= 0) {
 						sjx.text("");
 						$(".list-group").html("<div class=\"alert alert-warning\" role=\"alert\"><span style=\"color:#f39c12;\" class=\"glyphicon glyphicon-envelope\"></span>收件箱为空...</div>");
 					} else {
@@ -100,21 +94,17 @@
 				<div class="collapse navbar-collapse navbar-right" style="font-size: 20px;">
 					<ul class="nav navbar-nav">
 						<li style="font-size: 16px;"><a href="#">${user.emailAddress }</a></li>
-						<li><a href="<%=request.getContextPath()%>/pages/index.jsp">Home</a></li>
+						<li><a href="<%=request.getContextPath() %>/pages/index.jsp">Home</a></li>
 						<li class="active"><a href="#">收件箱 <s:if test="#session.totalEmailInboxCount != 0"><b id="emailInboxCount" style="color: #fff">${totalEmailInboxCount }</b></s:if></a></li>
-						<li><a href="sent.jsp">发件箱 <s:if test="#session.totalEmailSentedCount != 0"><b id="emailSentedCount" style="color: #fff">${totalEmailSentedCount }</b></s:if></a></li>
-						<li><a href="deleted.jsp">回收站 <s:if test="#session.totalEmailDeletedCount != 0"><b id="emailDeletedCount" style="color: #fff">${totalEmailDeletedCount }</b></s:if></a></li>
-						<li><a href="spam.jsp">垃圾箱 <s:if test="#session.totalEmailSpamCount != 0"><b id="emailSpamCount" style="color: #fff">${totalEmailSpamCount }</b></s:if></a></li>
+						<li><a href="<%=request.getContextPath() %>/email/emailSented_listSentedbox.action">发件箱 <s:if test="#session.totalEmailSentedCount != 0"><b id="emailSentedCount" style="color: #fff">${totalEmailSentedCount }</b></s:if></a></li>
+						<li><a href="<%=request.getContextPath() %>/email/emailSpam_listSpambox.action">垃圾箱 <s:if test="#session.totalEmailSpamCount != 0"><b id="emailSpamCount" style="color: #fff">${totalEmailSpamCount }</b></s:if></a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
 	
-	<div class="container email-info">
-		<div class="email-info-head" style="font-size: 18px;padding-left: 20px;">
-			<p>1份邮件未读 <button type="button" class="btn btn-link" style="font-size: 18px;text-decoration:none;"> 全部标记已读</button></p>
-		</div>
+	<div class="container email-info" style="padding-top: 40px;">
 		
 		<div class="list-group">
 			<s:if test="#request.emailInboxs == null || #request.emailInboxs.size() == 0">
@@ -170,6 +160,20 @@
 						      		%>
 									      	<h3>附件</h3>
 						      		<%
+						      				String attachmentFiles = emailInbox.getEmail().getAttachmentFiles();
+						      				String[] filenames = attachmentFiles.split(";");
+						      				for(String filename : filenames) {
+						      					filename = filename.trim();
+						      					if(filename == "") continue;
+						      					System.out.println("filename: " + filename);
+						      					String  name = filename.substring(28);
+						      		%>
+						      					<h3>
+						      					<a class="btn btn-success" href="<%=request.getContextPath() %>/emailinfo/fileDownload.action?fileName=<%=name %>">下载</a>
+						      					<span style="margin: 0 10px 10px; 10px;"><%=name %></span>
+						      					</h3>
+						      		<%
+						      				}
 						      			}
 						      		%>
 						      	</div>

@@ -16,9 +16,12 @@
 	<!-- 设置是否支持动态方法调用 -->
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 
-	<!-- 设置上传文件的最大大小为10485760字节=10M -->
-	<constant name="struts.multipart.maxSize" value="10485760" />
-
+	<!-- 设置上传文件的最大大小为20M -->
+	<constant name="struts.multipart.maxSize" value="20971520" />
+	
+	<!-- 设置上传文件的临时路径 -->
+	<constant name="struts.multipart.saveDir" value="E:\email_attachments\upload\upload_temp\"/>
+	
 	<package name="user" namespace="/user" extends="struts-default">
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="success" type="redirect">/pages/index.jsp</result>
@@ -35,6 +38,22 @@
 			<result name="success">/pages/inbox.jsp</result>
 			<result name="error">/pages/error.jsp</result>
 		</action>
+		<action name="emailSented_*" class="emailSentedboxAction" method="{1}">
+			<result name="listSentedbox">/pages/sent.jsp</result>
+			<result name="error">/pages/error.jsp</result>
+			<result type="stream" name="deleteEmailSented">
+				<param name="contentType">text/html</param>
+				<param name="inputName">deleteEmailInputStream</param>
+			</result>
+		</action>
+		<action name="emailSpam_*" class="emailSpamboxAction" method="{1}">
+			<result name="listSpambox">/pages/spam.jsp</result>
+			<result name="clearAll" type="redirectAction">emailSpam_listSpambox.action</result>
+			<result type="stream" name="deleteSpamEmail">
+				<param name="contentType">text/html</param>
+				<param name="inputName">deleteSpamEmailInputStream</param>
+			</result>
+		</action>
 	</package>
 	
 	<package name="emailinfo" namespace="/emailinfo" extends="struts-default">
@@ -43,6 +62,22 @@
 			<result type="stream" name="setEmailReaded">
 				<param name="contentType">text/html</param>
 				<param name="inputName">readedInputStream</param>
+			</result>
+		</action>
+		<action name="emailinfo_sendEmail" class="sendEmailAction" method="sendEmail">
+			<result name="success" type="redirectAction">
+				<param name="actionName">emailSented_listSentedbox.action</param>
+    			<param name="namespace">/email</param>
+			</result>
+		</action>
+
+		<action name="fileDownload" class="downloadAttachmentAction">
+			<result name="success" type="stream">
+				<!-- 设置contentType类型，并设置响应的编码类型为UTF-8 -->
+				<param name="contentType">application/x-msdownload;charset=UTF-8</param>
+				<param name="contentDisposition">attachment;fileName="${fileName}"</param>
+				<param name="inputName">downloadFileAsInputStream</param>
+				<param name="bufferSize">1024</param>
 			</result>
 		</action>
 	</package>

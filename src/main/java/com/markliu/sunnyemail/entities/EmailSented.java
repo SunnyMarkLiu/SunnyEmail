@@ -13,9 +13,7 @@ public class EmailSented {
 	public EmailSented() {
 	}
 
-	public EmailSented(Integer id, EmailInfo email) {
-		super();
-		this.id = id;
+	public EmailSented(EmailInfo email) {
 		this.email = email;
 	}
 

@@ -34,7 +34,7 @@ public class EmailDeletedDao {
 	}
 	
 	public boolean deleteEmailDeletedById(Integer id) {
-		String hql = "DELETE FROM EmailDeleted e WHERE e.id = ?";
+		String hql = "DELETE EmailDeleted e WHERE e.id = ?";
 		try {
 			getSession().createQuery(hql).setInteger(0, id).executeUpdate();
 			return true;

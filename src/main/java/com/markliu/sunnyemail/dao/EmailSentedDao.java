@@ -1,5 +1,7 @@
 package com.markliu.sunnyemail.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,7 @@ public class EmailSentedDao {
 	}
 	
 	public boolean deleteEmailSentedById(Integer id) {
-		String hql = "DELETE FROM EmailSented e WHERE e.id = ?";
+		String hql = "DELETE EmailSented e WHERE e.id = ?";
 		try {
 			getSession().createQuery(hql).setInteger(0, id).executeUpdate();
 			return true;
@@ -71,6 +73,18 @@ public class EmailSentedDao {
 			EmailSented emailSented = (EmailSented) getSession().createQuery(hql)
 					.setInteger(0, id).uniqueResult();
 			return emailSented;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<EmailSented> getAllEmailSentedbox() {
+		String hql = "FROM EmailSented";
+		try {
+			List<EmailSented> emailSentedboxs = getSession().createQuery(hql).list();
+			return emailSentedboxs;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

@@ -36,7 +36,7 @@ public class EmailInboxDao {
 	}
 	
 	public boolean deleteEmailInboxById(Integer id) {
-		String hql = "DELETE FROM EmailInbox e WHERE e.id = ?";
+		String hql = "DELETE EmailInbox e WHERE e.id = ?";
 		try {
 			getSession().createQuery(hql).setInteger(0, id).executeUpdate();
 			return true;

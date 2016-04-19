@@ -1,5 +1,7 @@
 package com.markliu.sunnyemail.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,4 +40,7 @@ public class EmailSentedService {
 		return emailSentedDao.getEmailSentedById(id);
 	}
 
+	public List<EmailSented> getAllEmailSentedbox() {
+		return emailSentedDao.getAllEmailSentedbox();
+	}
 }

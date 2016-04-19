@@ -413,6 +413,7 @@ public class EmailServerService {
 			// 创建邮件的接收者地址，并设置到邮件消息中
 			String toAddresses = email.getToAddress();
 			String[] toes = toAddresses.split(";");
+			System.out.println("toes: " + toes);
 			Address[] toAddresse = new InternetAddress[toes.length];
 			for(int i = 0 ; i < toes.length; i++) {
 				toAddresse[i] = new InternetAddress(toes[i]);

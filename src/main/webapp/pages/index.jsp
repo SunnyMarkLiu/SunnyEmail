@@ -54,12 +54,11 @@
 				</div>
 				<div class="collapse navbar-collapse navbar-right" style="font-size: 20px;">
 					<ul class="nav navbar-nav">
-						<li style="font-size: 16px;"><a href="about.html">${user.emailAddress }</a></li>
-						<li class="active"><a href="index.jsp">Home</a></li>
+						<li style="font-size: 16px;"><a href="#">${user.emailAddress }</a></li>
+						<li class="active"><a href="#">Home</a></li>
 						<li><a href="<%=request.getContextPath() %>/email/emailInbox_listInbox.action">收件箱 <s:if test="#session.totalEmailInboxCount != 0"><b id="emailInboxCount" style="color: #fff">${totalEmailInboxCount }</b></s:if></a></li>
-						<li><a href="<%=request.getContextPath() %>/email/emailInbox_listInbox.action">发件箱 <s:if test="#session.totalEmailSentedCount != 0"><b id="emailSentedCount" style="color: #fff">${totalEmailSentedCount }</b></s:if></a></li>
-						<li><a href="<%=request.getContextPath() %>/email/emailInbox_listInbox.action">回收站 <s:if test="#session.totalEmailDeletedCount != 0"><b id="emailDeletedCount" style="color: #fff">${totalEmailDeletedCount }</b></s:if></a></li>
-						<li><a href="<%=request.getContextPath() %>/email/emailInbox_listInbox.action">垃圾箱 <s:if test="#session.totalEmailSpamCount != 0"><b id="emailSpamCount" style="color: #fff">${totalEmailSpamCount }</b></s:if></a></li>
+						<li><a href="<%=request.getContextPath() %>/email/emailSented_listSentedbox.action">发件箱 <s:if test="#session.totalEmailSentedCount != 0"><b id="emailSentedCount" style="color: #fff">${totalEmailSentedCount }</b></s:if></a></li>
+						<li><a href="<%=request.getContextPath() %>/email/emailSpam_listSpambox.action">垃圾箱 <s:if test="#session.totalEmailSpamCount != 0"><b id="emailSpamCount" style="color: #fff">${totalEmailSpamCount }</b></s:if></a></li>
 					</ul>
 				</div>
 			</div>

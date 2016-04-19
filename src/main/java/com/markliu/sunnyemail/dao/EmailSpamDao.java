@@ -1,5 +1,7 @@
 package com.markliu.sunnyemail.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,7 @@ public class EmailSpamDao {
 	}
 	
 	public boolean deleteEmailSpamById(Integer id) {
-		String hql = "DELETE FROM EmailSpam e WHERE e.id = ?";
+		String hql = "DELETE EmailSpam e WHERE e.id = ?";
 		try {
 			getSession().createQuery(hql).setInteger(0, id).executeUpdate();
 			return true;
@@ -74,6 +76,29 @@ public class EmailSpamDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<EmailSpam> getAllSpamboxs() {
+		String hql = "FROM EmailSpam";
+		try {
+			List<EmailSpam> emailSpams = getSession().createQuery(hql).list();
+			return emailSpams;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public boolean deleteAllEmailSpams() {
+		String hql = "DELETE EmailSpam e WHERE 1 = 1";
+		try {
+			getSession().createQuery(hql).executeUpdate();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 }

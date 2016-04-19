@@ -1,5 +1,7 @@
 package com.markliu.sunnyemail.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,14 @@ public class EmailSpamService {
 
 	public EmailSpam getEmailSpamById(Integer id) {
 		return emailSpamDao.getEmailSpamById(id);
+	}
+
+	public List<EmailSpam> getAllSpamboxs() {
+		return emailSpamDao.getAllSpamboxs();
+	}
+
+	public boolean deleteAllEmailSpams() {
+		return emailSpamDao.deleteAllEmailSpams();
 	}
 
 }
