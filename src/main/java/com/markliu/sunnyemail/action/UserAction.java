@@ -66,7 +66,7 @@ public class UserAction extends ActionSupport implements SessionAware{
 			
 			// 放入收件箱、发件箱、回收站等的邮件数目
 			
-			session.put("totalEmailInboxCount", emailInboxService.getTotalEmailInboxCount());
+			session.put("totalEmailInboxCount", emailInboxService.getAllUnReadedCount());
 			session.put("totalEmailSentedCount", emailSentedService.getTotalEmailSentedCount());
 			session.put("totalEmailDeletedCount", emailDeletedService.getTotalEmailDeletedCount());
 			session.put("totalEmailSpamCount", emailSpamService.getTotalEmailSpamCount());
@@ -83,7 +83,7 @@ public class UserAction extends ActionSupport implements SessionAware{
     }
     public String ajaxListInfo() throws Exception {
     	
-    	int totalEmailInboxCount = emailInboxService.getTotalEmailInboxCount();
+    	int totalEmailInboxCount = emailInboxService.getAllUnReadedCount();
     	int totalEmailSentedCount = emailSentedService.getTotalEmailSentedCount();
     	int totalEmailDeletedCount = emailDeletedService.getTotalEmailDeletedCount();
     	int totalEmailSpamCount = emailSpamService.getTotalEmailSpamCount();

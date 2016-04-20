@@ -68,8 +68,20 @@ public class EmailInboxDao {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<EmailInbox> getAllUnReadedEmailInboxs() {
+		String hql = "FROM EmailInbox e WHERE e.email.isReaded = false";
+		try {
+			List<EmailInbox> emailInboxs = getSession().createQuery(hql).list();
+			return emailInboxs;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<EmailInbox> getAllEmailInboxs() {
-		String hql = "FROM EmailInbox";
+		String hql = "FROM EmailInbox e";
 		try {
 			List<EmailInbox> emailInboxs = getSession().createQuery(hql).list();
 			return emailInboxs;
@@ -88,6 +100,17 @@ public class EmailInboxDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	public int getAllUnReadedCount() {
+		String hql = "SELECT count(e.id) FROM EmailInbox e WHERE e.email.isReaded = false";
+		try {
+			Long count = (Long) getSession().createQuery(hql).uniqueResult();
+			return count.intValue();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
 		}
 	}
 }

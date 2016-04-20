@@ -36,12 +36,20 @@ public class EmailInboxService {
 		return emailInboxDao.getTotalEmailInboxCount();
 	}
 	
+	public List<EmailInbox> getAllUnReadedEmailInboxs() {
+		return emailInboxDao.getAllUnReadedEmailInboxs();
+	}
+	
 	public List<EmailInbox> getAllEmailInboxs() {
 		return emailInboxDao.getAllEmailInboxs();
 	}
 	
 	public EmailInbox getEmailInboxById(Integer id) {
 		return emailInboxDao.getEmailInboxById(id);
+	}
+
+	public int getAllUnReadedCount() {
+		return emailInboxDao.getAllUnReadedCount();
 	}
 	
 }

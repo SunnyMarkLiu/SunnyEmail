@@ -38,6 +38,18 @@
 			// 动态修改邮件的图标
 			if(result == "1") {
 				button.children().children().children("span.glyphicon-envelope").css("color", "#c8c6c3");
+				var unReadedCount_span = $(".unReadedCount_span");
+				var emailInboxCount_b = $("#emailInboxCount");
+				var count = parseInt(unReadedCount_span.text());
+				count = count-1;
+				if(count <= 0) {
+					unReadedCount_span.text(0);
+					emailInboxCount_b.text("");
+				}
+				else {
+					unReadedCount_span.text(count);
+					emailInboxCount_b.text(count);
+				}
 			}
 		});
 	}
@@ -105,7 +117,9 @@
 	</header>
 	
 	<div class="container email-info" style="padding-top: 40px;">
-		
+		<div>
+			<h3 style="padding-left: 10px;"><span class="unReadedCount_span" style="color: red; padding-right:5px;">${request.unReadedCount }</span>份未读邮件</h3>		
+		</div>
 		<div class="list-group">
 			<s:if test="#request.emailInboxs == null || #request.emailInboxs.size() == 0">
 				<div class="alert alert-warning" role="alert">

@@ -111,7 +111,7 @@
 						<div class="feature-wrap">
 							<i class="fa fa-bullhorn"></i>
 							<h2>Using Priority</h2>
-							<h3>Giveing emails some priorities created by learning algorithm, you can't miss some importent email !</h3>
+							<h3>Giving emails some priorities created by learning algorithm, you can't miss some importent email !</h3>
 						</div>
 					</div>
 				</div>

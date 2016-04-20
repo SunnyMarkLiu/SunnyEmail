@@ -121,7 +121,7 @@
 			      	</div>
 			      </div>
 			      <div class="modal-footer">
-			      	<input class="btn btn-success" type="submit" value="发送邮件" /></button>
+			      	<input class="btn btn-success" type="submit" value="发送邮件" />
 			      </div>
 			    </form>
 		    </div>

@@ -53,6 +53,8 @@ public class EmailInboxAction extends ActionSupport implements ServletRequestAwa
 		
 		List<EmailInbox> emailInboxs = emailInboxService.getAllEmailInboxs();
 		request.setAttribute("emailInboxs", emailInboxs);
+		int unReadedCount = emailInboxService.getAllUnReadedCount();
+		request.setAttribute("unReadedCount", unReadedCount);
 		return SUCCESS;
 	}
 
