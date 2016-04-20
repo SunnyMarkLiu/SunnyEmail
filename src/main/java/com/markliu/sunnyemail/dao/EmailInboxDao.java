@@ -81,10 +81,14 @@ public class EmailInboxDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<EmailInbox> getAllEmailInboxs() {
-		String hql = "FROM EmailInbox e";
+//		String hql = "FROM EmailInbox e ORDER BY e.email.isReaded ASC,e.email.priority DESC";
 		try {
-			List<EmailInbox> emailInboxs = getSession().createQuery(hql).list();
-			return emailInboxs;
+			String hql = "FROM EmailInbox e WHERE e.email.isReaded = false ORDER BY e.email.priority DESC";
+			List<EmailInbox> emailInboxs1 = getSession().createQuery(hql).list();
+			hql = "FROM EmailInbox e WHERE e.email.isReaded = true ORDER BY e.email.sentDate DESC";
+			List<EmailInbox> emailInboxs2 = getSession().createQuery(hql).list();
+			emailInboxs1.addAll(emailInboxs2);
+			return emailInboxs1;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

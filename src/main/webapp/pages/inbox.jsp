@@ -148,6 +148,7 @@
 									<%
 										}
 									%>
+									<span>优先级：<%=emailInbox.getEmail().getPriority() %></span>
 									<span style="padding-left: 20px;"><%=emailInbox.getEmail().getFromAddress() %></span>
 								</span>
 								<span class="col-md-5"><%=emailInbox.getEmail().getSubject() %></span>
